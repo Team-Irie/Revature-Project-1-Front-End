@@ -1,3 +1,5 @@
+console.log(window.origin);
+
 function handleLogin(e) {
   e.preventDefault();
 
@@ -12,8 +14,8 @@ function handleLogin(e) {
     .then((res) => res.json())
     .then((data) => {
       // set cookie with user data?
-      if role_id === 1, login as employee;
-      if role_id === 2, login as manager
+      if roleID === 'EMPLOYEE', login as employee;
+      if roleID === 'FINANCE_MANAGER', login as manager
     })
     .catch((err) => {
       // handle error;
@@ -23,20 +25,22 @@ function handleLogin(e) {
   // create users array for testing purposes, mocking data returned from server
   const users = [
     {
+      id: 1,
       username: 'ryansy',
       password: 'password123',
       first_name: 'Ryan',
       last_name: 'Sy',
       email:'ryanbsy@gmail.com',
-      role_id: 1
+      roleID: 'EMPLOYEE'
     },
     {
+      id: 2,
       username: 'tonymontana',
       password: 'password123',
       first_name: 'Tony',
       last_name: 'Montana',
       email:'scarface@gmail.com',
-      role_id: 2
+      roleID: "FINANCE_MANAGER"
     },
   ];
 
@@ -45,11 +49,13 @@ function handleLogin(e) {
       const user = users[i];
       Cookies.set('username', user.username);
       Cookies.set('fullName', `${user.first_name} ${user.last_name}`);
-      if (user.role_id === 1) {
-        window.location = `${window.origin}/employee-home`;
+      Cookies.set('id', user.id);
+      Cookies.set('roleID', user.roleID);
+      if (user.roleID === 'EMPLOYEE') {
+        window.location = `${window.origin}/views/employee-home.html`;
       }
-      if (user.role_id === 2) {
-        window.location = `${window.origin}/manager-home`;
+      if (user.roleID === 'FINANCE_MANAGER') {
+        window.location = `${window.origin}/views/manager-home.html`;
       }
       loginMessage.style.color = 'green';
       loginMessage.innerHTML = 'Logging in...';

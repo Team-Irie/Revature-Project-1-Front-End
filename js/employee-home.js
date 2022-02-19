@@ -6,6 +6,6 @@ $(document).ready(function() {
 
   // trigger submit reimbursement Modal
   $('#submitRequestButton').click(function() {
-    alert('clicked');
+    console.log('click');
   })
 });
